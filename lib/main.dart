@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       theme: lightThemeMode,
       darkTheme: darkThemeMode,
       home: const LoginScreen(),
+      // home: const MainBottomNavBar(),
     );
   }
 }

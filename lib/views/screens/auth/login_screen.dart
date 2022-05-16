@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:ecommerce_app/controllers/auth_controllers.dart';
+import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:ecommerce_app/views/screens/auth/register_screen.dart';
+import 'package:ecommerce_app/views/screens/auth/forgot_password_screen.dart';
 
 import '/utils/constants/all_constants.dart';
 
@@ -105,8 +106,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               "Sign Up",
                               style: TextStyle(fontSize: 18),
                             ),
-                          )
+                          ),
                         ],
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen()));
+                        },
+                        child: const Text(
+                          "Forgot password",
+                          style: TextStyle(fontSize: 14),
+                        ),
                       ),
                     ],
                   ),

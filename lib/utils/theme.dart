@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
+//... DARK MODE
 final darkThemeMode = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -28,8 +29,19 @@ final darkThemeMode = ThemeData.dark().copyWith(
             */
         ),
   ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: AppColors.backgroundColor,
+    selectedItemColor: AppColors.orangeWeb,
+    unselectedItemColor: AppColors.greyColor,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.backgroundColor,
+    foregroundColor: AppColors.white,
+    elevation: 0,
+  ),
 );
 
+//... LIGHT MODE
 final lightThemeMode = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   iconTheme: const IconThemeData(
@@ -55,5 +67,15 @@ final lightThemeMode = ThemeData(
             ... 
             */
         ),
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: AppColors.white,
+    selectedItemColor: AppColors.spaceCadet,
+    unselectedItemColor: AppColors.indyBlue,
+  ),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.white,
+    foregroundColor: AppColors.indyBlue,
+    elevation: 0,
   ),
 );

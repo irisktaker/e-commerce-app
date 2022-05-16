@@ -1,18 +1,58 @@
 import 'package:flutter/material.dart';
 
-class MainBottomNavBar extends StatelessWidget {
+import 'package:ecommerce_app/views/screens/home_screen.dart';
+import 'package:ecommerce_app/views/screens/cart_screen.dart';
+import 'package:ecommerce_app/views/screens/feeds_screen.dart';
+import 'package:ecommerce_app/views/screens/upload_screen.dart';
+import 'package:ecommerce_app/views/screens/search_screen.dart';
+import 'package:ecommerce_app/views/screens/profile_screen.dart';
+
+class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({Key? key}) : super(key: key);
+
+  @override
+  State<MainBottomNavBar> createState() => _MainBottomNavBarState();
+}
+
+class _MainBottomNavBarState extends State<MainBottomNavBar> {
+  int _pageIndex = 0;
+
+  List<Widget> tabScreens = const [
+    HomeScreen(),
+    FeedsScreen(),
+    SearchScreen(),
+    CartScreen(),
+    UploadScreen(),
+    ProfileScreen(),
+  ];
+
+  List<BottomNavigationBarItem> items = [
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(icon: Icon(Icons.rss_feed), label: 'Feeds'),
+    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.shopping_bag), label: 'Cart'),
+    const BottomNavigationBarItem(icon: Icon(Icons.upload), label: 'Upload'),
+    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: tabScreens[_pageIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-        ],
+        currentIndex: _pageIndex,
+        onTap: (index) => setState(() => _pageIndex = index),
+        items: items,
       ),
+      // CupertinoTabBar(
+      //   currentIndex: _pageIndex,
+      //   onTap: (index) => setState(() => _pageIndex = index),
+      //   backgroundColor: AppColors.white,
+      //   activeColor: AppColors.spaceCadet,
+      //   inactiveColor: AppColors.lightGrey,
+      //   items: items,
+      // ),
     );
   }
 }
