@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ecommerce_app/utils/firebase.dart';
@@ -33,7 +34,7 @@ class AuthController {
 
   // function to sign up user
   Future<String> signUpUser(String fullName, String username, String email,
-      String password, Uint8List image) async {
+      String password, Uint8List? image) async {
     String res = 'some error occurred';
     try {
       if (fullName.isNotEmpty &&
@@ -44,8 +45,8 @@ class AuthController {
         //..
         UserCredential userCred =
             await firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
+          email: email.trim(),
+          password: password.trim(),
         );
 
         String downloadUrl = await _addImageToStorage(image);
@@ -60,7 +61,7 @@ class AuthController {
           'image': downloadUrl,
         });
 
-        print(userCred.user!.email);
+        // print(userCred.user!.email);
         res = 'success';
       } else {
         res = 'fields must not be empty';
@@ -70,4 +71,29 @@ class AuthController {
     }
     return res;
   }
+
+  // ###############################################
+  // function to login users
+  loginUser(String email, String password) async {
+    String res = 'some error occurred';
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+
+        res = 'success';
+        print('you are now logged in');
+      } else {
+        res = 'fields must not be empty';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+
+    return res;
+  }
+}
+
+showSnackBar(String content, BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }
