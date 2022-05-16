@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/theme.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
