@@ -1,17 +1,36 @@
-import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
+import 'dart:typed_data';
 
-class RegisterScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:ecommerce_app/controllers/auth_controllers.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
+import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
+
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _usernameController = TextEditingController();
-    final TextEditingController _fullNameController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
 
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Uint8List? _image;
+
+  selectImage() async {
+    Uint8List _imageFromGallery =
+        await AuthController().pickImage(ImageSource.gallery);
+
+    setState(() => _image = _imageFromGallery);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     SizeConfig().init(context);
 
     return GestureDetector(
@@ -24,23 +43,32 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               children: [
                 Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      print('Take A Photo');
-                    },
-                    child: Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 80,
-                          backgroundColor: AppColors.spaceCadet,
+                  child: Stack(
+                    children: [
+                      _image != null
+                          ? CircleAvatar(
+                              radius: 80,
+                              backgroundColor: AppColors.spaceCadet,
+                              backgroundImage: MemoryImage(_image!),
+                            )
+                          : const CircleAvatar(
+                              radius: 80,
+                              backgroundColor: AppColors.spaceCadet,
+                              backgroundImage: NetworkImage(
+                                AppConstants.defaultUserImage,
+                              ),
+                            ),
+                      Positioned(
+                        right: -10,
+                        bottom: 6,
+                        child: IconButton(
+                          onPressed: selectImage,
+                          icon: const Icon(
+                            Icons.add_a_photo_outlined,
+                          ),
                         ),
-                        Positioned(
-                          right: 6,
-                          bottom: 16,
-                          child: Icon(Icons.add_a_photo_outlined),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 26),
@@ -78,8 +106,14 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 26),
                 ElevatedButton(
-                  onPressed: () {
-                    print("You signed in");
+                  onPressed: () async {
+                    await AuthController().signUpUser(
+                      _fullNameController.text,
+                      _usernameController.text,
+                      _emailController.text,
+                      _passwordController.text,
+                      _image!,
+                    );
                   },
                   child: const Text(
                     "Sign Up",
@@ -99,7 +133,7 @@ class RegisterScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen()));
+                                builder: (context) => LoginScreen()));
                       },
                       child: const Text(
                         "Login",

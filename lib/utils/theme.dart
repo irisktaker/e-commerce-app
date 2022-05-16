@@ -5,7 +5,7 @@ final darkThemeMode = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   iconTheme: const IconThemeData(
-    color: AppColors.greyColor,
+    color: AppColors.white,
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
@@ -33,7 +33,7 @@ final darkThemeMode = ThemeData.dark().copyWith(
 final lightThemeMode = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   iconTheme: const IconThemeData(
-    color: AppColors.indyBlue,
+    color: AppColors.black,
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
