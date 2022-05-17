@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class TagsList extends StatelessWidget {
   const TagsList({Key? key}) : super(key: key);

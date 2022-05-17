@@ -19,13 +19,13 @@ class MainBottomNavBar extends StatefulWidget {
 class _MainBottomNavBarState extends State<MainBottomNavBar> {
   int _pageIndex = 0;
 
-  List<Widget> tabScreens = const [
-    HomeScreen(),
+  List<Widget> tabScreens = [
+    const HomeScreen(),
     FeedsScreen(),
-    SearchScreen(),
-    CartScreen(),
-    UploadScreen(),
-    ProfileScreen(),
+    const SearchScreen(),
+    const CartScreen(),
+    const UploadScreen(),
+    const ProfileScreen(),
   ];
 
   List<BottomNavigationBarItem> items = [

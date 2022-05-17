@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class SearchInput extends StatelessWidget {
   const SearchInput({Key? key}) : super(key: key);

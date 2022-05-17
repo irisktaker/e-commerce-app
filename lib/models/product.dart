@@ -1,4 +1,6 @@
-class Products {
+import 'package:flutter/material.dart';
+
+class Product with ChangeNotifier {
   final String id;
   final String title;
   final String description;
@@ -7,7 +9,7 @@ class Products {
   final String productCategoryName;
   final int quantity;
 
-  Products(
+  Product(
       {required this.id,
       required this.title,
       required this.description,

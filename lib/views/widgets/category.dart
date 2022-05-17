@@ -1,6 +1,7 @@
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
-import 'package:ecommerce_app/views/widgets/category_item.dart';
 import 'package:flutter/material.dart';
+
+import 'package:ecommerce_app/views/widgets/category_item.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);
@@ -9,8 +10,8 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Container(
-      height: 180,
+    return SizedBox(
+      height: 190,
       width: SizeConfig.screenWidth,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

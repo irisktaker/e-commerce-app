@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:ecommerce_app/models/clothes.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
-import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
   final Clothes clothes;

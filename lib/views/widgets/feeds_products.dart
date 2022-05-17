@@ -1,14 +1,20 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-
-import 'package:ecommerce_app/models/clothes.dart';
-import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class FeedsProducts extends StatefulWidget {
-  const FeedsProducts(this.clothes, {Key? key}) : super(key: key);
+  final String id;
+  final String title;
+  final double price;
+  final String imageUrl;
 
-  final Clothes clothes;
+  const FeedsProducts(
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.price,
+      required this.imageUrl})
+      : super(key: key);
 
   @override
   State<FeedsProducts> createState() => _FeedsProductsState();
@@ -21,11 +27,11 @@ class _FeedsProductsState extends State<FeedsProducts> {
       height: 200,
       minWidth: 200,
       onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => DetailPage(widget.clothes),
-          ),
-        );
+        // Navigator.of(context).push(
+        // MaterialPageRoute(
+        // builder: (context) => DetailPage(widget.clothes),
+        // ),
+        // );
       },
       padding: const EdgeInsets.only(bottom: SizeConfig.defaultPadding),
       child: Card(
@@ -46,9 +52,9 @@ class _FeedsProductsState extends State<FeedsProducts> {
                         BorderRadius.circular(SizeConfig.defaultPadding / 2),
                     image: DecorationImage(
                       image: AssetImage(
-                        widget.clothes.productImageUrl.toString(),
+                        widget.imageUrl.toString(),
                       ),
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
@@ -67,7 +73,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
               ],
             ),
             Text(
-              widget.clothes.productName.toString(),
+              widget.title.toString(),
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -75,7 +81,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
               ),
             ),
             Text(
-              widget.clothes.productPrice.toString(),
+              "\$${widget.price}",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 height: 1.6,

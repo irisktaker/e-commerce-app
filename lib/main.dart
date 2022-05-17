@@ -1,10 +1,12 @@
-import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:ecommerce_app/utils/theme.dart';
+import 'package:ecommerce_app/provider/products_provider.dart';
+import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
-import 'package:flutter/services.dart';
 
 import 'firebase_options.dart';
 
@@ -27,14 +29,21 @@ class MyApp extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
     );
-    return MaterialApp(
-      title: 'E-Commerce',
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
-      theme: lightThemeMode,
-      darkTheme: darkThemeMode,
-      // home: const LoginScreen(),
-      home: const MainBottomNavBar(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ProductsProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'E-Commerce',
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.system,
+        theme: lightThemeMode,
+        darkTheme: darkThemeMode,
+        // home: const LoginScreen(),
+        home: const MainBottomNavBar(),
+      ),
     );
   }
 }

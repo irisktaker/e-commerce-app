@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({Key? key, required this.index}) : super(key: key);
@@ -56,12 +56,13 @@ class CategoryItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(SizeConfig.defaultPadding),
               image: DecorationImage(
                 image: AssetImage("${categoryList[index]['categoryImage']}"),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           ),
           Positioned(
             bottom: 0,
+            left: 5,
             child: Text(
               "${categoryList[index]['categoryName']}",
               style: const TextStyle(
