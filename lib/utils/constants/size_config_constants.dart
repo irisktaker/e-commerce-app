@@ -7,6 +7,8 @@ class SizeConfig {
   static double? defaultSize;
   static Orientation? orientation;
   static double appBarHeight = AppBar().preferredSize.height;
+  static const double defaultPadding = 16;
+  static const double defaultRadius = 16;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);

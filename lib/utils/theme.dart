@@ -5,6 +5,8 @@ import 'package:ecommerce_app/utils/constants/all_constants.dart';
 final darkThemeMode = ThemeData.dark().copyWith(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   visualDensity: VisualDensity.adaptivePlatformDensity,
+  canvasColor: AppColors.backgroundColor,
+  primaryColor: Colors.white,
   iconTheme: const IconThemeData(
     color: AppColors.white,
   ),
@@ -31,19 +33,25 @@ final darkThemeMode = ThemeData.dark().copyWith(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: AppColors.backgroundColor,
-    selectedItemColor: AppColors.orangeWeb,
+    selectedItemColor: AppColors.spaceLight,
     unselectedItemColor: AppColors.greyColor,
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: AppColors.backgroundColor,
     foregroundColor: AppColors.white,
     elevation: 0,
+    centerTitle: true,
   ),
 );
 
 //... LIGHT MODE
 final lightThemeMode = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
+  primaryColor: Colors.black,
+  primaryColorLight: Colors.black,
+  canvasColor: AppColors.white,
+  // primaryColorDark: Colors.white,
+
   iconTheme: const IconThemeData(
     color: AppColors.black,
   ),
@@ -77,5 +85,6 @@ final lightThemeMode = ThemeData(
     backgroundColor: AppColors.white,
     foregroundColor: AppColors.indyBlue,
     elevation: 0,
+    centerTitle: true,
   ),
 );

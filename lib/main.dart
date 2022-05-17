@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/utils/theme.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
+import 'package:flutter/services.dart';
 
 import 'firebase_options.dart';
 
@@ -20,14 +21,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return MaterialApp(
       title: 'E-Commerce',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: lightThemeMode,
       darkTheme: darkThemeMode,
-      home: const LoginScreen(),
-      // home: const MainBottomNavBar(),
+      // home: const LoginScreen(),
+      home: const MainBottomNavBar(),
     );
   }
 }

@@ -7,6 +7,8 @@ import 'package:ecommerce_app/views/screens/upload_screen.dart';
 import 'package:ecommerce_app/views/screens/search_screen.dart';
 import 'package:ecommerce_app/views/screens/profile_screen.dart';
 
+import '../../utils/constants/all_constants.dart';
+
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({Key? key}) : super(key: key);
 
@@ -39,7 +41,13 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabScreens[_pageIndex],
+      body: SafeArea(
+        child: Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: SizeConfig.defaultPadding),
+          child: tabScreens[_pageIndex],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _pageIndex,
         onTap: (index) => setState(() => _pageIndex = index),
