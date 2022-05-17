@@ -92,6 +92,24 @@ class AuthController {
 
     return res;
   }
+
+  // ###############################################
+  // function to reset user password
+  resetPassword(String email) async {
+    String res = 'some error occurred';
+    try {
+      if (email.isNotEmpty) {
+        await firebaseAuth.sendPasswordResetEmail(email: email);
+        res = 'success';
+        print('success send reset password to $email');
+      } else {
+        res = 'email must not be empty';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
+  }
 }
 
 showSnackBar(String content, BuildContext context) {
