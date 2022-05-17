@@ -1,7 +1,9 @@
-import 'package:ecommerce_app/models/clothes.dart';
-import 'package:ecommerce_app/utils/constants/all_constants.dart';
-import 'package:ecommerce_app/views/details/details_page.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+
+import 'package:ecommerce_app/models/clothes.dart';
+import 'package:ecommerce_app/views/details/details_page.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class ProductsWidget extends StatelessWidget {
   const ProductsWidget({Key? key, required this.clothes}) : super(key: key);
@@ -20,7 +22,7 @@ class ProductsWidget extends StatelessWidget {
           ),
         );
       },
-      padding: const EdgeInsets.all(0),
+      padding: const EdgeInsets.only(bottom: SizeConfig.defaultPadding),
       child: Card(
         margin: const EdgeInsets.only(right: SizeConfig.defaultPadding / 2),
         shape: RoundedRectangleBorder(
@@ -48,31 +50,13 @@ class ProductsWidget extends StatelessWidget {
                 Positioned(
                   right: 6,
                   top: 6,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          blurRadius: 0.1,
-                          offset: const Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        print("Icon Clicked");
-                      },
-                      padding: const EdgeInsets.all(0),
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                        size: 20,
-                      ),
-                    ),
+                  child: Badge(
+                    toAnimate: true,
+                    shape: BadgeShape.square,
+                    badgeColor: AppColors.deepPurple,
+                    borderRadius: BorderRadius.circular(8),
+                    badgeContent: const Text('New',
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/models/clothes.dart';
@@ -54,31 +55,13 @@ class _FeedsProductsState extends State<FeedsProducts> {
                 Positioned(
                   right: 6,
                   top: 6,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          blurRadius: 0.1,
-                          offset: const Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        print("Icon Clicked");
-                      },
-                      padding: const EdgeInsets.all(0),
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                        size: 20,
-                      ),
-                    ),
+                  child: Badge(
+                    toAnimate: false,
+                    shape: BadgeShape.square,
+                    badgeColor: AppColors.buttonColor,
+                    borderRadius: BorderRadius.circular(8),
+                    badgeContent: const Text('New',
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
