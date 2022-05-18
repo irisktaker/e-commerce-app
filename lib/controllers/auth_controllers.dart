@@ -61,7 +61,6 @@ class AuthController {
           'image': downloadUrl,
         });
 
-        // print(userCred.user!.email);
         res = 'success';
       } else {
         res = 'fields must not be empty';
@@ -82,7 +81,6 @@ class AuthController {
             email: email, password: password);
 
         res = 'success';
-        print('you are now logged in');
       } else {
         res = 'fields must not be empty';
       }
@@ -101,7 +99,6 @@ class AuthController {
       if (email.isNotEmpty) {
         await firebaseAuth.sendPasswordResetEmail(email: email);
         res = 'success';
-        print('success send reset password to $email');
       } else {
         res = 'email must not be empty';
       }
@@ -114,5 +111,4 @@ class AuthController {
 
 showSnackBar(String content, BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
-
 }

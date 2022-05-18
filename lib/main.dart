@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: lightThemeMode,
         darkTheme: darkThemeMode,
-        // home: const LoginScreen(),
-        home: const MainBottomNavBar(),
+        home: const LoginScreen(),
+        // home: const MainBottomNavBar(),
       ),
     );
   }

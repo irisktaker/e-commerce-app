@@ -27,7 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _passwordController.text,
     );
 
-    res = 'success';
     setState(() => _isLoading = false);
 
     if (res != 'success') {
