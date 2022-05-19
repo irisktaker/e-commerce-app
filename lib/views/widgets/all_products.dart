@@ -23,8 +23,11 @@ class AllProductWidget extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => ProductsWidget(
-              index: index,
+            itemBuilder: (context, index) => ChangeNotifierProvider.value(
+              value: _productsList[index],
+              child: ProductsWidget(
+                index: index,
+              ),
             ),
             separatorBuilder: (_, int index) => const SizedBox(
               width: SizeConfig.defaultPadding / 2,

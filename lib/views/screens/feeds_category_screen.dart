@@ -17,14 +17,18 @@ class FeedsCategoryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Feeds Products")),
-      body: GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: SizeConfig.defaultPadding / 2,
-        childAspectRatio: 200 / 300,
-        children: List.generate(
-          _productsList.length,
-          (index) => ChangeNotifierProvider.value(
-              value: _productsList[index], child: const FeedsProducts()),
+      body: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: SizeConfig.defaultPadding),
+        child: GridView.count(
+          crossAxisCount: 2,
+          crossAxisSpacing: SizeConfig.defaultPadding / 2,
+          childAspectRatio: 200 / 300,
+          children: List.generate(
+            _productsList.length,
+            (index) => ChangeNotifierProvider.value(
+                value: _productsList[index], child: const FeedsProducts()),
+          ),
         ),
       ),
     );

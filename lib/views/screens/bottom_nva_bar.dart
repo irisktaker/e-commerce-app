@@ -21,7 +21,7 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
 
   List<Widget> tabScreens = [
     const HomeScreen(),
-    FeedsScreen(),
+    const FeedsScreen(),
     const SearchScreen(),
     const CartScreen(),
     const UploadScreen(),

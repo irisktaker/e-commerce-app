@@ -11,6 +11,15 @@ class ProductsProvider with ChangeNotifier {
       imageUrl: 'assets/images/dress1.jpeg',
       productCategoryName: 'clothes',
       quantity: 3,
+    ),
+    Product(
+      id: '1',
+      title: "iPhone",
+      description: "iPhone is one of the best selling clothes product",
+      price: 999.90,
+      imageUrl: 'assets/images/CatPhones.png',
+      productCategoryName: 'Phones',
+      quantity: 3,
     )
   ];
 
