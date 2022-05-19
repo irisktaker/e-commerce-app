@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:ecommerce_app/views/screens/feeds_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
@@ -7,34 +8,34 @@ class CategoryItem extends StatelessWidget {
   CategoryItem({Key? key, required this.index}) : super(key: key);
   final int index;
 
-  List<Map<String, Object>> categoryList = [
+  final List<Map<String, Object>> _categoryList = [
     {
-      'categoryName': 'Phones',
-      'categoryImage': 'assets/images/CatPhones.png',
+      'category_name': 'Phones',
+      'category_image': 'assets/images/CatPhones.png',
     },
     {
-      'categoryName': 'Clothes',
-      'categoryImage': 'assets/images/CatClothes.jpg',
+      'category_name': 'Clothes',
+      'category_image': 'assets/images/CatClothes.jpg',
     },
     {
-      'categoryName': 'Laptops',
-      'categoryImage': 'assets/images/CatLaptops.png',
+      'category_name': 'Laptops',
+      'category_image': 'assets/images/CatLaptops.png',
     },
     {
-      'categoryName': 'Beauty',
-      'categoryImage': 'assets/images/CatBeauty.jpg',
+      'category_name': 'Beauty',
+      'category_image': 'assets/images/CatBeauty.jpg',
     },
     {
-      'categoryName': 'Furniture',
-      'categoryImage': 'assets/images/CatFurniture.jpg',
+      'category_name': 'Furniture',
+      'category_image': 'assets/images/CatFurniture.jpg',
     },
     {
-      'categoryName': 'Shoes',
-      'categoryImage': 'assets/images/CatShoes.jpg',
+      'category_name': 'Shoes',
+      'category_image': 'assets/images/CatShoes.jpg',
     },
     {
-      'categoryName': 'Watches',
-      'categoryImage': 'assets/images/CatWatches.jpg',
+      'category_name': 'Watches',
+      'category_image': 'assets/images/CatWatches.jpg',
     },
   ];
 
@@ -46,17 +47,25 @@ class CategoryItem extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Container(
-            width: 150,
-            height: 150,
-            margin: const EdgeInsets.only(
-              right: SizeConfig.defaultPadding,
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(
+              context,
+              FeedsCategoryScreen.id,
+              arguments: _categoryList[index]['category_name'],
             ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(SizeConfig.defaultPadding),
-              image: DecorationImage(
-                image: AssetImage("${categoryList[index]['categoryImage']}"),
-                fit: BoxFit.fill,
+            child: Container(
+              width: 150,
+              height: 150,
+              margin: const EdgeInsets.only(
+                right: SizeConfig.defaultPadding,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(SizeConfig.defaultPadding),
+                image: DecorationImage(
+                  image:
+                      AssetImage("${_categoryList[index]['category_image']}"),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
@@ -64,7 +73,7 @@ class CategoryItem extends StatelessWidget {
             bottom: 0,
             left: 5,
             child: Text(
-              "${categoryList[index]['categoryName']}",
+              "${_categoryList[index]['category_name']}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/views/screens/feeds_category_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         home: const MainBottomNavBar(),
         routes: {
           DetailPage.id: (context) => const DetailPage(),
+          FeedsCategoryScreen.id: (context) => const FeedsCategoryScreen(),
         },
       ),
     );
