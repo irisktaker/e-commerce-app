@@ -14,7 +14,9 @@ class ProductsProvider with ChangeNotifier {
     )
   ];
 
-  List<Product> get products {
-    return _products;
-  }
+  // find the right product when clicking on it by product id
+  Product findById(String productId) =>
+      _products.firstWhere((e) => e.id == productId);
+
+  List<Product> get products => _products;
 }

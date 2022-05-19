@@ -33,7 +33,7 @@ final darkThemeMode = ThemeData.dark().copyWith(
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: AppColors.backgroundColor,
-    selectedItemColor: AppColors.spaceLight,
+    selectedItemColor: AppColors.buttonColor,
     unselectedItemColor: AppColors.greyColor,
   ),
   appBarTheme: const AppBarTheme(

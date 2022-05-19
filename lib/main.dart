@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:ecommerce_app/utils/theme.dart';
+import 'package:ecommerce_app/provider/cart_provider.dart';
 import 'package:ecommerce_app/provider/products_provider.dart';
+import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
 
@@ -31,9 +33,9 @@ class MyApp extends StatelessWidget {
     );
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => ProductsProvider(),
-        ),
+        ChangeNotifierProvider(create: (_) => ProductsProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+        // ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MaterialApp(
         title: 'E-Commerce',
@@ -41,8 +43,11 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: lightThemeMode,
         darkTheme: darkThemeMode,
-        home: const LoginScreen(),
-        // home: const MainBottomNavBar(),
+        // home: const LoginScreen(),
+        home: const MainBottomNavBar(),
+        routes: {
+          DetailPage.id: (context) => const DetailPage(),
+        },
       ),
     );
   }

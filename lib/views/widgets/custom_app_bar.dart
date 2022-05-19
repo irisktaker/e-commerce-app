@@ -12,16 +12,10 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "Howdy, What are you\nlooking for? ",
+            "Howdy, What are you\nlooking for? 👀",
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-            ),
-          ),
-          const Text(
-            '👀',
-            style: TextStyle(
-              fontSize: 28,
             ),
           ),
           Container(

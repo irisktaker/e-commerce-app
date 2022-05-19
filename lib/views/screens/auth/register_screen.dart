@@ -83,7 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   )
                                 : const CircleAvatar(
                                     radius: 80,
-                                    backgroundColor: AppColors.spaceCadet,
+                                    backgroundColor: AppColors.greyColor,
                                     backgroundImage: NetworkImage(
                                       AppConstants.defaultUserImage,
                                     ),
