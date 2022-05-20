@@ -1,10 +1,9 @@
 import 'package:badges/badges.dart';
-import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/provider/products_provider.dart';
+import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class ProductsWidget extends StatelessWidget {
@@ -13,9 +12,7 @@ class ProductsWidget extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    final _productsProvider = Provider.of<ProductsProvider>(context);
     final _products = Provider.of<Product>(context);
-    List<Product> _productsList = _productsProvider.products;
 
     return MaterialButton(
       height: 200,
@@ -40,7 +37,7 @@ class ProductsWidget extends StatelessWidget {
                     borderRadius:
                         BorderRadius.circular(SizeConfig.defaultPadding / 2),
                     image: DecorationImage(
-                      image: AssetImage(
+                      image: NetworkImage(
                         _products.imageUrl,
                       ),
                       fit: BoxFit.fill,

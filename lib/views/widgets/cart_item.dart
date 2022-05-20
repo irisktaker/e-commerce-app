@@ -42,7 +42,8 @@ class CartItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(SizeConfig.defaultRadius),
                   image: DecorationImage(
-                      image: AssetImage(_cartAttr.imageUrl), fit: BoxFit.cover),
+                      image: NetworkImage(_cartAttr.imageUrl),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -62,7 +63,8 @@ class CartItem extends StatelessWidget {
                           ),
                         ),
                         InkWell(
-                          onTap: () => _cartProvider.removeProductFromCart(productId),
+                          onTap: () =>
+                              _cartProvider.removeProductFromCart(productId),
                           child: const Icon(
                             Icons.close,
                             color: Colors.red,

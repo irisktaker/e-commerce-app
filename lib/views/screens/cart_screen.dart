@@ -1,4 +1,3 @@
-import 'package:ecommerce_app/models/cart_attr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -37,15 +36,6 @@ class CartScreen extends StatelessWidget {
             value: _cartProvider.getCartItems.values.toList()[index],
             child: CartItem(
               productId: _cartProvider.getCartItems.keys.toList()[index],
-              // REPLACE WITH BETTER WAY USING PROVIDER
-              // id: _cartProvider.getCartItems.values.toList()[index].id,
-              // productId: _cartProvider.getCartItems.keys.toList()[index],
-              // title: _cartProvider.getCartItems.values.toList()[index].title,
-              // price: _cartProvider.getCartItems.values.toList()[index].price,
-              // quantity:
-              //     _cartProvider.getCartItems.values.toList()[index].quantity,
-              // imageUrl:
-              //     _cartProvider.getCartItems.values.toList()[index].imageUrl,
             ),
           );
         },

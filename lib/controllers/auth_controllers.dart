@@ -34,13 +34,14 @@ class AuthController {
 
   // function to sign up user
   Future<String> signUpUser(String fullName, String username, String email,
-      String password, Uint8List? image) async {
+      String password, String phoneNumber, Uint8List? image) async {
     String res = 'some error occurred';
     try {
       if (fullName.isNotEmpty &&
           username.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
+          phoneNumber.isNotEmpty &&
           image != null) {
         //..
         UserCredential userCred =
@@ -58,6 +59,7 @@ class AuthController {
           'full-name': fullName,
           'username': username,
           'email': email,
+          'phone-number': phoneNumber,
           'image': downloadUrl,
         });
 

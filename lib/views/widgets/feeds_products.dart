@@ -1,8 +1,10 @@
 import 'package:badges/badges.dart';
-import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:ecommerce_app/models/product.dart';
+import 'package:ecommerce_app/views/details/details_page.dart';
+import 'package:ecommerce_app/provider/products_provider.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class FeedsProducts extends StatefulWidget {
@@ -16,6 +18,8 @@ class _FeedsProductsState extends State<FeedsProducts> {
   @override
   Widget build(BuildContext context) {
     final _products = Provider.of<Product>(context);
+    final _productProvider = Provider.of<ProductsProvider>(context);
+    _productProvider.fetchProducts();
 
     return MaterialButton(
       height: 200,
@@ -40,7 +44,7 @@ class _FeedsProductsState extends State<FeedsProducts> {
                     borderRadius:
                         BorderRadius.circular(SizeConfig.defaultPadding / 2),
                     image: DecorationImage(
-                      image: AssetImage(
+                      image: NetworkImage(
                         _products.imageUrl.toString(),
                       ),
                       fit: BoxFit.fill,

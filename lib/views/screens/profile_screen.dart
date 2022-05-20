@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/firebase.dart';
 
@@ -12,10 +13,19 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String? _name;
   String? _email;
+  String? _imageUrl;
+  String? _phoneNumber;
+
+  ScrollController? _scrollController;
+  var top = 0.0;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController!.addListener(() {
+      setState(() {});
+    });
     getUserData();
   }
 
@@ -30,19 +40,242 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _name = userData.get('username');
       _email = userData.get('email');
+      _imageUrl = userData.get('image');
+      _phoneNumber = userData.get('phone-number');
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("$_name"),
+      body: Stack(
+        children: [
+          CustomScrollView(
+            controller: _scrollController,
+            slivers: <Widget>[
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                elevation: 4,
+                expandedHeight: 200,
+                pinned: true,
+                flexibleSpace: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    top = constraints.biggest.height;
+                    return Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: [
+                              Theme.of(context).accentColor,
+                              Theme.of(context).primaryColor,
+                            ],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(1.0, 0.0),
+                            stops: const [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      child: FlexibleSpaceBar(
+                          collapseMode: CollapseMode.parallax,
+                          centerTitle: true,
+                          title: Row(
+                            //  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              AnimatedOpacity(
+                                duration: const Duration(milliseconds: 300),
+                                opacity: top <= 110.0 ? 1.0 : 0,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Container(
+                                      height: kToolbarHeight / 1.8,
+                                      width: kToolbarHeight / 1.8,
+                                      decoration: const BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.white,
+                                              blurRadius: 1.0,
+                                            ),
+                                          ],
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              fit: BoxFit.fill,
+                                              image: NetworkImage(
+                                                  // '${_userImage.toString()}'
+                                                  'https://cdn1.vectorstock.com/i/thumb-large/62/60/default-avatar-photo-placeholder-profile-image-vector-21666260.jpg'))),
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    const Text(
+                                      'Guest',
+                                      style: TextStyle(
+                                          fontSize: 20.0, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          background: Image(
+                              image: NetworkImage('$_imageUrl'),
+                              fit: BoxFit.fill)),
+                    );
+                  },
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: _userTitle('User Bag')),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        splashColor: Theme.of(context).splashColor,
+                        child: ListTile(
+                          onTap: () {},
+                          title: const Text('Cart'),
+                          trailing: const Icon(Icons.chevron_right_rounded),
+                          leading: const Icon(CupertinoIcons.cart),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: _userTitle('User Information')),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    _userListTile('Email', '$_email' '', 0, context),
+                    _userListTile('Username', '$_name' '', 1, context),
+                    _userListTile(
+                        'Phone number', '$_phoneNumber' '', 2, context),
+                    _userListTile('Shipping address', '', 3, context),
+                    _userListTile('joined date', '5pm', 4, context),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {},
+                        splashColor: Theme.of(context).backgroundColor,
+                        child: const ListTile(
+                          title: Text('My Orders'),
+                          leading: Icon(Icons.shop),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: _userTitle('User settings'),
+                    ),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        splashColor: Theme.of(context).backgroundColor,
+                        child: ListTile(
+                          onTap: () async {
+                            await firebaseAuth.signOut();
+                          },
+                          title: const Text('Logout'),
+                          leading: const Icon(Icons.exit_to_app_rounded),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          _buildFab()
+        ],
       ),
-      body: Center(
-        child: ElevatedButton(
-            onPressed: () async => await firebaseAuth.signOut(),
-            child: const Text("Sign out")),
+    );
+  }
+
+  Widget _buildFab() {
+    //starting fab position
+    const double defaultTopMargin = 200.0 - 4.0;
+    //pixels from top where scaling should start
+    const double scaleStart = 160.0;
+    //pixels from top where scaling should end
+    const double scaleEnd = scaleStart / 2;
+
+    double top = defaultTopMargin;
+    double scale = 1.0;
+    if (_scrollController!.hasClients) {
+      double offset = _scrollController!.offset;
+      top -= offset;
+      if (offset < defaultTopMargin - scaleStart) {
+        //offset small => don't scale down
+        scale = 1.0;
+      } else if (offset < defaultTopMargin - scaleEnd) {
+        //offset between scaleStart and scaleEnd => scale down
+        scale = (defaultTopMargin - scaleEnd - offset) / scaleEnd;
+      } else {
+        //offset passed scaleEnd => hide fab
+        scale = 0.0;
+      }
+    }
+
+    return Positioned(
+      top: top,
+      right: 16.0,
+      child: Transform(
+        transform: Matrix4.identity()..scale(scale),
+        alignment: Alignment.center,
+        child: FloatingActionButton(
+          backgroundColor: Colors.purple,
+          heroTag: "btn1",
+          onPressed: () {},
+          child: const Icon(Icons.camera_alt_outlined),
+        ),
+      ),
+    );
+  }
+
+  final List<IconData> _userTileIcons = [
+    Icons.email,
+    Icons.person,
+    Icons.phone,
+    Icons.local_shipping,
+    Icons.watch_later,
+  ];
+
+  Widget _userListTile(
+      String title, String subTitle, int index, BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        splashColor: Theme.of(context).splashColor,
+        child: ListTile(
+          onTap: () {},
+          title: Text(title),
+          subtitle: Text(subTitle),
+          leading: Icon(_userTileIcons[index]),
+        ),
+      ),
+    );
+  }
+
+  Widget _userTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.all(14.0),
+      child: Text(
+        title,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
       ),
     );
   }

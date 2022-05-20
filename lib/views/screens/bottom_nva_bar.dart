@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:ecommerce_app/views/screens/home_screen.dart';
 import 'package:ecommerce_app/views/screens/cart_screen.dart';
+import 'package:ecommerce_app/provider/products_provider.dart';
 import 'package:ecommerce_app/views/screens/feeds_screen.dart';
 import 'package:ecommerce_app/views/screens/upload_screen.dart';
 import 'package:ecommerce_app/views/screens/search_screen.dart';
 import 'package:ecommerce_app/views/screens/profile_screen.dart';
-
-import '../../utils/constants/all_constants.dart';
+import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class MainBottomNavBar extends StatefulWidget {
   const MainBottomNavBar({Key? key}) : super(key: key);
@@ -40,6 +41,9 @@ class _MainBottomNavBarState extends State<MainBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final _productProvider = Provider.of<ProductsProvider>(context);
+    _productProvider.fetchProducts();
+
     return Scaffold(
       body: SafeArea(
         child: Padding(

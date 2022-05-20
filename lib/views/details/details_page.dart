@@ -31,7 +31,7 @@ class DetailPage extends StatelessWidget {
                   height: 500,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(_productAttr.imageUrl),
+                      image: NetworkImage(_productAttr.imageUrl),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(

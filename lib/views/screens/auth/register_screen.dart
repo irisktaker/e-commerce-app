@@ -19,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   Uint8List? _image;
   bool _isLoading = false;
@@ -37,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _usernameController.text,
       _emailController.text,
       _passwordController.text,
+      _phoneController.text,
       _image,
     );
 
@@ -124,6 +126,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        decoration: kTextInputDecoration.copyWith(
+                          hintText: "Enter your phone number",
+                        ),
+                        controller: _phoneController,
+                        keyboardType: TextInputType.phone,
                       ),
                       const SizedBox(height: 16),
                       TextField(
