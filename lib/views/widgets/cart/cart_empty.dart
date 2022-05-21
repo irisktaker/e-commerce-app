@@ -41,7 +41,6 @@ class CartEmpty extends StatelessWidget {
             onPressed: () {},
             child: const Text(
               "Shop Now",
-              // TODO Change theme color for text
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),

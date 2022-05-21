@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_app/views/widgets/category_item.dart';
+import 'package:ecommerce_app/views/widgets/category/category_item.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class Category extends StatelessWidget {

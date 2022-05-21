@@ -28,7 +28,7 @@ class AuthController {
     if (_file != null) {
       return await _file.readAsBytes();
     } else {
-      print('no image selected');
+      return 'no image selected';
     }
   }
 

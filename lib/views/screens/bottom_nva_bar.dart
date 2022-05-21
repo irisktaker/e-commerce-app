@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:ecommerce_app/views/screens/home_screen.dart';
-import 'package:ecommerce_app/views/screens/cart_screen.dart';
+import 'package:ecommerce_app/views/screens/home/home_screen.dart';
+import 'package:ecommerce_app/views/screens/cart/cart_screen.dart';
 import 'package:ecommerce_app/provider/products_provider.dart';
-import 'package:ecommerce_app/views/screens/feeds_screen.dart';
-import 'package:ecommerce_app/views/screens/upload_screen.dart';
-import 'package:ecommerce_app/views/screens/search_screen.dart';
-import 'package:ecommerce_app/views/screens/profile_screen.dart';
+import 'package:ecommerce_app/views/screens/feeds/feeds_screen.dart';
+import 'package:ecommerce_app/views/screens/upload/upload_screen.dart';
+import 'package:ecommerce_app/views/screens/search/search_screen.dart';
+import 'package:ecommerce_app/views/screens/profile/profile_screen.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
 class MainBottomNavBar extends StatefulWidget {

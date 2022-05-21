@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/views/screens/order/order_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/firebase.dart';
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                             colors: [
-                              Theme.of(context).accentColor,
+                              Theme.of(context).colorScheme.secondary,
                               Theme.of(context).primaryColor,
                             ],
                             begin: const FractionalOffset(0.0, 0.0),
@@ -165,7 +166,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, OrderScreen.id);
+                        },
                         splashColor: Theme.of(context).backgroundColor,
                         child: const ListTile(
                           title: Text('My Orders'),

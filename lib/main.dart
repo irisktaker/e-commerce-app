@@ -6,11 +6,13 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:ecommerce_app/utils/theme.dart';
 import 'package:ecommerce_app/provider/cart_provider.dart';
+import 'package:ecommerce_app/provider/orders_provider.dart';
 import 'package:ecommerce_app/views/details/details_page.dart';
 import 'package:ecommerce_app/provider/products_provider.dart';
 import 'package:ecommerce_app/views/screens/bottom_nva_bar.dart';
 import 'package:ecommerce_app/views/screens/auth/login_screen.dart';
-import 'package:ecommerce_app/views/screens/feeds_category_screen.dart';
+import 'package:ecommerce_app/views/screens/order/order_screen.dart';
+import 'package:ecommerce_app/views/screens/feeds/feeds_category_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => ProductsProvider()),
         ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => OrdersProvider()),
       ],
       child: MaterialApp(
         title: 'E-Commerce',
@@ -64,6 +67,7 @@ class MyApp extends StatelessWidget {
         routes: {
           DetailPage.id: (context) => const DetailPage(),
           FeedsCategoryScreen.id: (context) => const FeedsCategoryScreen(),
+          OrderScreen.id: (context) => const OrderScreen(),
         },
       ),
     );

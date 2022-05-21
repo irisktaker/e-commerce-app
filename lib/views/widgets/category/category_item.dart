@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:ecommerce_app/views/screens/feeds_category_screen.dart';
+import 'package:ecommerce_app/views/screens/feeds/feeds_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 

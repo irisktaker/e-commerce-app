@@ -93,9 +93,9 @@ class CartItem extends StatelessWidget {
                     const SizedBox(height: SizeConfig.defaultPadding / 2.5),
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "Subtotal: ",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                           ),
                         ),
@@ -114,9 +114,9 @@ class CartItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       textBaseline: TextBaseline.alphabetic,
                       children: [
-                        Text(
+                        const Text(
                           "Free Shipping ",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                           ),
                         ),

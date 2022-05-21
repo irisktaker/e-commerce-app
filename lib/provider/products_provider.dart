@@ -13,7 +13,8 @@ class ProductsProvider with ChangeNotifier {
         .get()
         .then((QuerySnapshot productSnapshot) {
       _products = [];
-      productSnapshot.docs.forEach((element) {
+      // productSnapshot.docs.forEach((element) {
+      for (var element in productSnapshot.docs) {
         _products.insert(
             0,
             Product(
@@ -24,7 +25,7 @@ class ProductsProvider with ChangeNotifier {
                 imageUrl: element.get('imageUrl'),
                 productCategoryName: element.get('productCategoryName'),
                 quantity: element.get('quantity')));
-      });
+      }
     });
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ecommerce_app/models/product.dart';
-import 'package:ecommerce_app/views/widgets/product.dart';
+import 'package:ecommerce_app/views/widgets/product/product.dart';
 import 'package:ecommerce_app/provider/products_provider.dart';
 import 'package:ecommerce_app/utils/constants/all_constants.dart';
 
