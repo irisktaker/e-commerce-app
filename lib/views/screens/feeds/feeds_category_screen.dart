@@ -13,7 +13,7 @@ class FeedsCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _productsProvider = Provider.of<ProductsProvider>(context);
     final _categoryName = ModalRoute.of(context)!.settings.arguments as String;
-    final _productsList = _productsProvider.findByCaCategory(_categoryName);
+    final _productsList = _productsProvider.findByCategory(_categoryName);
 
     return Scaffold(
       appBar: AppBar(title: const Text("Feeds Products")),

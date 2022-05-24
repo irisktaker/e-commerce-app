@@ -1,13 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
+
+import 'package:ecommerce_app/views/widgets/gradient_icon.dart';
+import 'package:ecommerce_app/views/screens/upload/upload_bloc.dart';
 
 class UploadScreen extends StatefulWidget {
   static const routeName = '/UploadProductForm';
-
   const UploadScreen({Key? key}) : super(key: key);
 
   @override
@@ -15,95 +14,13 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
-  File? _pickedImage;
-
-  void _pickImageCamera() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(
-      source: ImageSource.camera,
-      imageQuality: 40,
-    );
-    final pickedImageFile = File(pickedImage!.path);
-    setState(() {
-      _pickedImage = pickedImageFile;
-    });
-    // widget.imagePickFn(pickedImageFile);
-  }
-
-  void _pickImageGallery() async {
-    final picker = ImagePicker();
-    final pickedImage = await picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 50,
-    );
-    final pickedImageFile = pickedImage == null ? null : File(pickedImage.path);
-
-    setState(() {
-      _pickedImage = pickedImageFile;
-    });
-    // widget.imagePickFn(pickedImageFile);
-  }
-
-  void _removeImage() {
-    setState(() {
-      _pickedImage = null;
-    });
-  }
+  final _bloc = UploadBloc();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        bottomSheet: Container(
-          height: kBottomNavigationBarHeight * 0.8,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              top: BorderSide(
-                color: Colors.grey,
-                width: 0.5,
-              ),
-            ),
-          ),
-          child: Material(
-            color: Theme.of(context).backgroundColor,
-            child: InkWell(
-              onTap: () {
-                print('uploaded');
-              },
-              splashColor: Colors.grey,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: const <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 2),
-                    child: Text('Upload',
-                        style: TextStyle(fontSize: 16),
-                        textAlign: TextAlign.center),
-                  ),
-                  GradientIcon(
-                    CupertinoIcons.upload_circle,
-                    20,
-                    LinearGradient(
-                      colors: <Color>[
-                        Colors.green,
-                        Colors.yellow,
-                        Colors.deepOrange,
-                        Colors.orange,
-                        Colors.yellow
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -119,13 +36,14 @@ class _UploadScreenState extends State<UploadScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Flexible(
+                            Flexible(
                               flex: 3,
                               child: Padding(
-                                padding: EdgeInsets.only(right: 9),
+                                padding: const EdgeInsets.only(right: 9),
                                 child: TextField(
+                                  controller: _bloc.titleController,
                                   keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: 'Product Title',
                                   ),
                                 ),
@@ -134,6 +52,7 @@ class _UploadScreenState extends State<UploadScreen> {
                             Flexible(
                               flex: 1,
                               child: TextField(
+                                controller: _bloc.priceController,
                                 key: const ValueKey('Price \$'),
                                 keyboardType: TextInputType.number,
                                 inputFormatters: <TextInputFormatter>[
@@ -154,7 +73,7 @@ class _UploadScreenState extends State<UploadScreen> {
                           children: <Widget>[
                             Expanded(
                               //  flex: 2,
-                              child: _pickedImage == null
+                              child: _bloc.pickedImage == null
                                   ? Container(
                                       margin: const EdgeInsets.all(10),
                                       height: 200,
@@ -181,8 +100,8 @@ class _UploadScreenState extends State<UploadScreen> {
                                               Theme.of(context).backgroundColor,
                                         ),
                                         child: Image.file(
-                                          _pickedImage!,
-                                          fit: BoxFit.contain,
+                                          _bloc.pickedImage!,
+                                          fit: BoxFit.fill,
                                           alignment: Alignment.center,
                                         ),
                                       ),
@@ -194,7 +113,8 @@ class _UploadScreenState extends State<UploadScreen> {
                               children: [
                                 FittedBox(
                                   child: TextButton.icon(
-                                    onPressed: _pickImageCamera,
+                                    onPressed: () =>
+                                        _bloc.pickImageCamera(setState),
                                     icon: const Icon(Icons.camera,
                                         color: Colors.purpleAccent),
                                     label: const Text(
@@ -207,7 +127,8 @@ class _UploadScreenState extends State<UploadScreen> {
                                 ),
                                 FittedBox(
                                   child: TextButton.icon(
-                                    onPressed: _pickImageGallery,
+                                    onPressed: () =>
+                                        _bloc.pickImageGallery(setState),
                                     icon: const Icon(Icons.image,
                                         color: Colors.purpleAccent),
                                     label: const Text(
@@ -220,7 +141,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                 ),
                                 FittedBox(
                                   child: TextButton.icon(
-                                    onPressed: _removeImage,
+                                    onPressed: () => _bloc.removeImage,
                                     icon: const Icon(
                                       Icons.remove_circle_outline,
                                       color: Colors.red,
@@ -238,18 +159,17 @@ class _UploadScreenState extends State<UploadScreen> {
                             ),
                           ],
                         ),
-
-                        //    SizedBox(height: 5),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsets.only(right: 9),
+                                padding: const EdgeInsets.only(right: 9),
                                 child: TextField(
+                                  controller: _bloc.categoryController,
                                   keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: 'Add a new Category',
                                   ),
                                 ),
@@ -257,12 +177,10 @@ class _UploadScreenState extends State<UploadScreen> {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 15),
                         TextField(
                             key: const ValueKey('Description'),
-
-                            //controller: this._controller,
+                            controller: _bloc.descriptionController,
                             maxLines: 10,
                             textCapitalization: TextCapitalization.sentences,
                             decoration: const InputDecoration(
@@ -278,14 +196,15 @@ class _UploadScreenState extends State<UploadScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
-                          children: const [
+                          children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsets.only(right: 9),
+                                padding: const EdgeInsets.only(right: 9),
                                 child: TextField(
+                                  controller: _bloc.quantityController,
                                   keyboardType: TextInputType.number,
-                                  key: ValueKey('Quantity'),
-                                  decoration: InputDecoration(
+                                  key: const ValueKey('Quantity'),
+                                  decoration: const InputDecoration(
                                     labelText: 'Quantity',
                                   ),
                                 ),
@@ -304,35 +223,66 @@ class _UploadScreenState extends State<UploadScreen> {
             ],
           ),
         ),
+        bottomSheet: bottomSheet(context),
       ),
     );
   }
-}
 
-class GradientIcon extends StatelessWidget {
-  const GradientIcon(this.icon, this.size, this.gradient, {Key? key})
-      : super(key: key);
-
-  final IconData icon;
-  final double size;
-  final Gradient gradient;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      child: SizedBox(
-        width: size * 1.2,
-        height: size * 1.2,
-        child: Icon(
-          icon,
-          size: size,
-          color: Colors.white,
+  Container bottomSheet(BuildContext context) {
+    return Container(
+      height: kBottomNavigationBarHeight * 0.8,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(
+            color: Colors.grey,
+            width: 0.5,
+          ),
         ),
       ),
-      shaderCallback: (Rect bounds) {
-        final Rect rect = Rect.fromLTRB(0, 0, size, size);
-        return gradient.createShader(rect);
-      },
+      child: Material(
+        color: Theme.of(context).backgroundColor,
+        child: InkWell(
+          onTap: () {
+            // TODO:
+            _bloc.uploadProduct();
+            _bloc.titleController.clear();
+            _bloc.descriptionController.clear();
+            _bloc.categoryController.clear();
+            _bloc.priceController.clear();
+            _bloc.quantityController.clear();
+          },
+          splashColor: Colors.grey,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: const <Widget>[
+              Padding(
+                padding: EdgeInsets.only(right: 2),
+                child: Text('Upload',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center),
+              ),
+              GradientIcon(
+                CupertinoIcons.upload_circle,
+                20,
+                LinearGradient(
+                  colors: <Color>[
+                    Colors.green,
+                    Colors.yellow,
+                    Colors.deepOrange,
+                    Colors.orange,
+                    Colors.yellow
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

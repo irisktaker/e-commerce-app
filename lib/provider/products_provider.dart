@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductsProvider with ChangeNotifier {
   List<Product> _products = [];
+  List<Product> get product => _products;
 
   // fetch products
   Future<void> fetchProducts() async {
@@ -32,10 +33,10 @@ class ProductsProvider with ChangeNotifier {
   // find the right product when clicking on it by product id
   Product findById(String productId) =>
       _products.firstWhere((e) => e.id == productId);
-
   List<Product> get products => _products;
 
-  List<Product> findByCaCategory(String categoryName) {
+  // find by category
+  List<Product> findByCategory(String categoryName) {
     List _categoryList = products
         .where((element) => element.productCategoryName
             .toLowerCase()
