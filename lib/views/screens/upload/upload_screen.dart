@@ -244,15 +244,7 @@ class _UploadScreenState extends State<UploadScreen> {
       child: Material(
         color: Theme.of(context).backgroundColor,
         child: InkWell(
-          onTap: () {
-            // TODO:
-            _bloc.uploadProduct();
-            _bloc.titleController.clear();
-            _bloc.descriptionController.clear();
-            _bloc.categoryController.clear();
-            _bloc.priceController.clear();
-            _bloc.quantityController.clear();
-          },
+          onTap: _bloc.uploadProduct,
           splashColor: Colors.grey,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

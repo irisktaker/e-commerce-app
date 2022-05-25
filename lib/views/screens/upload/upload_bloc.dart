@@ -19,7 +19,7 @@ class UploadBloc {
   // get pickImageCamera => _pickImageCamera(pickedImage);
   // get pickImageGallery => _pickImageGallery(pickedImage);
   // get removeImage => _removeImage;
-  get uploadProduct => _uploadProduct();
+  get uploadProduct => _uploadProduct;
 
   void pickImageCamera(setState) async {
     final picker = ImagePicker();

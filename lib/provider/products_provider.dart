@@ -22,10 +22,10 @@ class ProductsProvider with ChangeNotifier {
                 id: element.get('id'),
                 title: element.get('title'),
                 description: element.get('description'),
-                price: element.get('price'),
+                price: double.parse(element.get('price')),
                 imageUrl: element.get('imageUrl'),
                 productCategoryName: element.get('productCategoryName'),
-                quantity: element.get('quantity')));
+                quantity: int.parse(element.get('quantity'))));
       }
     });
   }

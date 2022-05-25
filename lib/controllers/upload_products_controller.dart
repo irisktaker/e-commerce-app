@@ -23,8 +23,8 @@ class UploadProductsController {
       String title,
       String description,
       String productCategoryName,
-      String price,
-      String quantity,
+      var price,
+      var quantity,
       File? imageUrl) async {
     String res = 'something happened';
     try {
